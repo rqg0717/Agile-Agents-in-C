@@ -10,13 +10,14 @@
 #include <string.h>
 #include "ooc.h"
 
-typedef struct s_mem_block_list
+/* object linked list */
+typedef struct
 {
-	char file[MAX_PATH_LEN];		//source file
-	int32_t n_line;						//line number
-	void* p_addr;						//address
+	char file[MAX_PATH_LEN];		//source file - only for debugging memory leak
+	int32_t n_line;					//line number - only for debugging memory leak
+	void* p_addr;					//address
 	size_t size;					//memory block size
-	struct s_memblock_list * next;	//next block
+	struct mem_block_list * next;	//next block
 } mem_block_list;
 
 static mem_block_list * p_obj_list_s = NULL;
@@ -36,7 +37,7 @@ void* obj_malloc(size_t size, const char * p_obj, const char * p_file, int32_t n
 		mem_block_list *p_objlist = (mem_block_list*)malloc(
 			sizeof(mem_block_list));
 		if (!p_objlist) {
-			printf("Error! malloc mem_block_list failed.\r\n");
+			printf("Error! allocate mem_block_list failed.\r\n");
 			exit(1);
 		}
 
@@ -53,12 +54,16 @@ void* obj_malloc(size_t size, const char * p_obj, const char * p_file, int32_t n
 		p_objlist->next = p_obj_list_s;
 		p_obj_list_s = p_objlist;
 
-		printf("malloc memory in %p, size: %lu, object: %s, file: %s, line: %d.\r\n",
+		printf("allocate memory in %p, size: %lu, object: %s, file: %s, line: %d.\r\n",
 			p_addr, size, p_obj, p_file, n_line);
 	}
 	return p_addr;
 }
 
+/**
+ * [deallocate memory and remove the object]
+ * @param void * p_mem_block [object pointer]
+ */
 void obj_free(void * p_mem_block)
 {
 	mem_block_list *p_pre = NULL;
@@ -90,6 +95,9 @@ void obj_free(void * p_mem_block)
 	}
 }
 
+/**
+ * [check memory leak]
+ */
 void check_mem_leak(void)
 {
 	mem_block_list *p_cur = p_obj_list_s;
