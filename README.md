@@ -1,4 +1,2 @@
-# OOP-in-C
-Object-Oriented Programming (OOP) Agent in C
-
-Provide OOP Agent template in C for programming distributed systems and multi-agent systems on ARM Mbed OS
+# Agile Agents in C 
+Object-Oriented Programming (OOP) in C for building agile agents on ARM Mbed OS
