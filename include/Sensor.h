@@ -20,8 +20,10 @@ extern "C" {
 	 * Sensor Class
 	 */
 	CLASS(Sensor) {
+		//Inheritance
 		EXTENDS(oocAgent);
 		int32_t n_speed;
+		//Encapsulation
 		int32_t (*get_Speed)(Sensor * this_);
 		void(*set_Speed)(Sensor * this_, int32_t n_speed);
 		oocString* (*get_ID)(Sensor * this_);
