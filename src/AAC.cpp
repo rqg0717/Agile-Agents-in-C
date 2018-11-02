@@ -1,9 +1,9 @@
 //============================================================================
-// Name        : MAC.cpp
+// Name        : AAC.cpp
 // Author      : James Ren
 // Version     :
 // Copyright   : (c) 2017 James Ren. All rights reserved.
-// Description : Multi-agent in C
+// Description : agile agents in C
 //============================================================================
 
 #include <iostream>
