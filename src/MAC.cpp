@@ -8,7 +8,6 @@
 
 #include <iostream>
 #include "oocString.h"
-#include "oocAgent.h"
 #include "Sensor.h"
 
 using namespace std;
