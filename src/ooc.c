@@ -4,11 +4,30 @@
 *
 * @par
 * COPYRIGHT NOTICE: (c) 2017 James Ren. All rights reserved.
+*
+* Permission to use, copy, modify, and distribute this software and
+* its documentation for any purpose, without fee, and without a
+* written agreement is hereby granted, provided that the above
+* copyright notice and this paragraph and the following two
+* paragraphs appear in all copies.
+*
+* IN NO EVENT SHALL THE AUTHOR BE LIABLE TO ANY PARTY FOR DIRECT,
+* INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING
+* LOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS
+* DOCUMENTATION, EVEN IF THE UNIVERSITY OF CALIFORNIA HAS BEEN ADVISED
+* OF THE POSSIBILITY OF SUCH DAMAGE.
+*
+* THE AUTHOR SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT
+* LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+* A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS ON AN "AS
+* IS" BASIS, AND THE AUTHOR HAS NO OBLIGATIONS TO PROVIDE MAINTENANCE,
+* SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
+*
 */
 
+#include <ooc.h>
 #include <stdio.h>
 #include <string.h>
-#include "ooc.h"
 
 /* object linked list */
 typedef struct
@@ -54,8 +73,8 @@ void* obj_malloc(size_t size, const char * p_obj, const char * p_file, int32_t n
 		p_objlist->next = p_obj_list_s;
 		p_obj_list_s = p_objlist;
 
-		printf("allocate memory in %p, size: %lu, object: %s, file: %s, line: %d.\r\n",
-			p_addr, size, p_obj, p_file, n_line);
+		//printf("allocate memory in %p, size: %lu, object: %s, file: %s, line: %d.\r\n",
+		//	p_addr, size, p_obj, p_file, n_line);
 	}
 	return p_addr;
 }
@@ -70,8 +89,9 @@ void obj_free(void * p_mem_block)
 	mem_block_list *p_cur = p_obj_list_s;
 	while (p_cur) {
 		if (p_cur->p_addr == p_mem_block) {
-			printf("free memory at %p, size: %lu.\r\n",
-				p_cur->p_addr, p_cur->size);
+
+			printf("free memory at %p, size: %lu.\r\n",	p_cur->p_addr, p_cur->size);
+
 			if (p_pre == NULL) {
 				p_obj_list_s = p_cur->next;
 			}
@@ -113,5 +133,6 @@ void check_mem_leak(void)
 		printf("No memory leak.\r\n");
 	}
 }
+
 
 /*** end of file ***/

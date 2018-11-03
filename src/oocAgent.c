@@ -6,10 +6,10 @@
  * COPYRIGHT NOTICE: (c) 2017 James Ren. All rights reserved.
  */
 
+#include <oocAgent.h>
 #include <string.h>
 #include <stdio.h>
 
-#include "oocAgent.h"
 
 static void finalize_agent(oocObject* object)
 {

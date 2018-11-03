@@ -8,8 +8,8 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <Sensor.h>
 
-#include "Sensor.h"
 
 static void init_Sensor(Sensor *this_, const char * p_id, const char * p_name)
 {

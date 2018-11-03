@@ -7,10 +7,10 @@
 */
 
 
+#include <oocString.h>
 #include <string.h>
 #include <stdio.h>
 
-#include "oocString.h"
 
 static void init_string(oocString * this_, const char * c_str) 
 {
