@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : AAC.cpp
 // Author      : James Ren
-// Version     :
+// Version     : 0.1
 // Copyright   : (c) 2017 James Ren. All rights reserved.
 // Description : agile agents in C
 //============================================================================
@@ -16,6 +16,7 @@
 using namespace std;
 
 #define BILLION 1E9
+#define THOUSAND 1000.0
 
 class  cppObject
 {
@@ -136,11 +137,10 @@ string* trim(string* str, const string& chars = "\t\n\v\f\r ")
 
 int main()
 {
-	//struct timeval start, end;
 	struct timespec ts_start, ts_end;
 
-	printf("\======================= C++ performance test ======================\r\n\n");
-	clock_gettime(CLOCK_REALTIME, &ts_start);
+	printf("*********************** C++ performance test *********************** \n\n");
+	clock_gettime(CLOCK_MONOTONIC, &ts_start);
 	/////////////////////////////////////////
 	//on heap
 	string *p_string, *p_substring, *p_strName;
@@ -180,14 +180,13 @@ int main()
 	p_cppSensor = NULL;
 
 	//////////////////////////////////////
-	clock_gettime(CLOCK_REALTIME, &ts_end);
+	clock_gettime(CLOCK_MONOTONIC, &ts_end);
 
-	printf("C++ time elapsed in second: %lf\n\n", ( ts_end.tv_sec - ts_start.tv_sec ) + ( ts_end.tv_nsec - ts_start.tv_nsec )
-			  / BILLION);
+	printf("C++ time elapsed in ms: %.3f \n\n", ( ts_end.tv_nsec - ts_start.tv_nsec ) / THOUSAND);
 
-	printf("\======================= C performance test ======================\r\n\n");
-	//gettimeofday(&start, NULL);
-	clock_gettime(CLOCK_REALTIME, &ts_start);
+	printf("*********************** C performance test *********************** \n\n");
+
+	clock_gettime(CLOCK_MONOTONIC, &ts_start);
 	///////////////////////////////
 	oocString *p_str, *p_substr;
 	Sensor *p_sensor = NULL;
@@ -221,7 +220,7 @@ int main()
 	p_name = p_sensor->getName(p_sensor);
 	p_name->trim(p_name);
 
-	printf("Sensor name is %s and current speed is %d \r\n", p_name->c_str(p_name), p_sensor->getSpeed(p_sensor));
+	printf("Sensor name is %s and current speed is %d \n", p_name->c_str(p_name), p_sensor->getSpeed(p_sensor));
 
 	//Polymorphism
 	/*IAction *p_action;
@@ -239,14 +238,11 @@ int main()
 
 	//check_mem_leak();
 	///////////////////////////
-	//gettimeofday(&end, NULL);
-	//printf("C: %ld\n", ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec)));
 
-	clock_gettime(CLOCK_REALTIME, &ts_end);
-	printf("C time elapsed in second: %lf \n\n", ( ts_end.tv_sec - ts_start.tv_sec ) + ( ts_end.tv_nsec - ts_start.tv_nsec )
-			  / BILLION);
+	clock_gettime(CLOCK_MONOTONIC, &ts_end);
+	printf("C time elapsed in ms: %.3f \n\n", ( ts_end.tv_nsec - ts_start.tv_nsec ) / THOUSAND);
 
-	printf("\======================= End of test ======================\r\n");
+	printf("*********************** End of test *********************** \n");
 
 	return 0;
 }
