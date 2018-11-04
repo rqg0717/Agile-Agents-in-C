@@ -24,11 +24,16 @@ static void finalize_agent(oocObject* object)
 	}
 }
 
+static void action_agent(IAction* a)
+{
+    printf("this is agent action! \n");
+}
+
 CTOR(oocAgent)
 	SUPER_CTOR(oocObject);
 	this_->p_id = NULL;
 	this_->p_name = NULL;
-	//Polymorphism
+	FUNCTION_BIND(IAction.action, action_agent);
 	FUNCTION_BIND(oocObject.finalize, finalize_agent);END_CTOR
 
 DTOR(oocAgent)

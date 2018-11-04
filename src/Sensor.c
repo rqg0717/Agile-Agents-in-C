@@ -41,12 +41,18 @@ static int32_t get_sensor_speed(Sensor * this_)
 	return this_->n_speed;
 }
 
+static void action_sensor(IAction* a)
+{
+    printf("this is sensor action! \n");
+}
+
 CTOR(Sensor)
 	SUPER_CTOR(oocAgent);
-	FUNCTION_BIND(get_ID, get_sensor_id);
-	FUNCTION_BIND(get_Name, get_sensor_name);
-	FUNCTION_BIND(get_Speed, get_sensor_speed);
-	FUNCTION_BIND(set_Speed, set_sensor_speed);
+	FUNCTION_BIND(IAction.action, action_sensor);
+	FUNCTION_BIND(getID, get_sensor_id);
+	FUNCTION_BIND(getName, get_sensor_name);
+	FUNCTION_BIND(getSpeed, get_sensor_speed);
+	FUNCTION_BIND(setSpeed, set_sensor_speed);
 	FUNCTION_BIND(init, init_Sensor);END_CTOR
 
 DTOR(Sensor)

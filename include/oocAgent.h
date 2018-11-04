@@ -15,15 +15,20 @@ extern "C" {
 
 #include "oocString.h"
 
+	INTERFACE(IAction)
+	{
+		void (*action)(IAction* a);
+	};
+
 	/**
 	 * Agent Class
 	 */
 	CLASS(oocAgent) {
 		EXTENDS(oocObject);
+		IMPLEMENTS(IAction);
 
 		oocString  *p_name;
 		oocString  *p_id;
-
 	};
 	
 #ifdef __cplusplus

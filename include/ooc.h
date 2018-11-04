@@ -85,7 +85,7 @@ extern "C" {
 
 /* Abstract Class is used as a base class */
 #define ABS_CLASS(obj)						\
-	typedef struct stru_##obj obj;				\
+	typedef struct stru_##obj obj;			\
 	extern void obj##_ctor(obj * this_); 	\
 	extern void obj##_dtor(obj * this_);  	\
 	extern void obj##_delete(obj * this_);	\
@@ -98,7 +98,7 @@ extern "C" {
 
 /* A class template */
 #define CLASS(obj)									\
-	typedef struct stru_##obj obj;						\
+	typedef struct stru_##obj obj;					\
 	extern obj * obj##_new(const char * p_file, int32_t n_line);	\
 	extern void obj##_ctor(obj* this_);				\
 	extern void obj##_dtor(obj * this_);			\
@@ -171,7 +171,7 @@ extern "C" {
  * grandchild is grandchild class pointer
  * return grandchild class pointer
  */
-#define SUB_PTR_2(this_, self, child, grandchild)\
+#define SUB_PTR_2(this_, self, child, grandchild)	\
 	SUB_PTR(SUB_PTR(this_, self, child), child, grandchild)
 
 /* Superclass Constructor */
@@ -185,6 +185,15 @@ extern "C" {
 /* Function Bind */
 #define FUNCTION_BIND(func_1, func_2)	\
 	this_->func_1 = func_2
+
+/* Interface for Polymorphism */
+#define INTERFACE(action)             		\
+	typedef struct stru_##action action;    \
+	void action##_ctor(action* a);          \
+	int action##_dtor(action* a);           \
+	struct stru_##action
+
+#define IMPLEMENTS(action)	struct stru_##action action
 
 /* allocate memory to an object and put the object to a object list */
 extern void * obj_malloc(size_t size, const char * p_obj, const char * p_file, int32_t n_line);

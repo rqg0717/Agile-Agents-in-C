@@ -142,7 +142,7 @@ int main()
 	printf("\======================= C++ performance test ======================\r\n\n");
 	clock_gettime(CLOCK_REALTIME, &ts_start);
 	/////////////////////////////////////////
-
+	//on heap
 	string *p_string, *p_substring, *p_strName;
 	cppSensor *p_cppSensor;
 
@@ -193,7 +193,7 @@ int main()
 	Sensor *p_sensor = NULL;
 	oocString *p_name = NULL;
 
-	/* test String */
+	/* test String on heap*/
 	p_str = oocString_new(__FILE__, __LINE__);
 	p_str->init(p_str, "  agent rocks rock agents  ");
 
@@ -212,17 +212,29 @@ int main()
 
 	//check_mem_leak();
 
-	/* test Polymorphism, Encapsulation, Inheritance */
+	/* test Polymorphism, Encapsulation, Inheritance on heap*/
 	p_sensor = Sensor_new(__FILE__, __LINE__);
 
 	p_sensor->init(p_sensor, "001", " speed sensor ");
 
-	p_sensor->set_Speed(p_sensor, 120);
-	p_name = p_sensor->get_Name(p_sensor);
+	p_sensor->setSpeed(p_sensor, 120);
+	p_name = p_sensor->getName(p_sensor);
 	p_name->trim(p_name);
 
-	printf("Sensor name is %s and current speed is %d \r\n", p_name->c_str(p_name), p_sensor->get_Speed(p_sensor));
+	printf("Sensor name is %s and current speed is %d \r\n", p_name->c_str(p_name), p_sensor->getSpeed(p_sensor));
 
+	//Polymorphism
+	/*IAction *p_action;
+
+	p_action = SUPER_PTR(p_sensor, IAction);
+	p_action->action(p_action);
+
+	oocAgent *p_agent;
+	p_agent = oocAgent_new(__FILE__, __LINE__);
+	p_action = SUPER_PTR(p_agent, IAction);
+	p_action->action(p_action);
+
+	oocAgent_delete(p_agent);*/
 	Sensor_delete(p_sensor);
 
 	//check_mem_leak();
