@@ -182,7 +182,7 @@ int main()
 	//////////////////////////////////////
 	clock_gettime(CLOCK_MONOTONIC, &ts_end);
 
-	printf("C++ time elapsed in ms: %.3f \n\n", ( ts_end.tv_nsec - ts_start.tv_nsec ) / THOUSAND);
+	printf("C++ time elapsed in microsecond: %.3f \n\n", ( ts_end.tv_nsec - ts_start.tv_nsec ) / THOUSAND);
 
 	printf("*********************** C performance test *********************** \n\n");
 
@@ -240,7 +240,7 @@ int main()
 	///////////////////////////
 
 	clock_gettime(CLOCK_MONOTONIC, &ts_end);
-	printf("C time elapsed in ms: %.3f \n\n", ( ts_end.tv_nsec - ts_start.tv_nsec ) / THOUSAND);
+	printf("C time elapsed in microsecond: %.3f \n\n", ( ts_end.tv_nsec - ts_start.tv_nsec ) / THOUSAND);
 
 	printf("*********************** End of test *********************** \n");
 
